@@ -23,7 +23,7 @@ public final class MyTask implements Runnable {
     }
     
     @Override
-    public void run() {
+    public synchronized void run() {
         LOG.info("Warten...");
         synchronized (lock) {
             try {
