@@ -95,4 +95,18 @@ public final class BoundedBuffer<T> {
         return element;
     }
 
+    private synchronized T front() {
+        T element = this.buffer[0];
+        this.buffer[0] = null;
+        this.size--;
+        return element;
+    }
+
+    private synchronized T back() {
+        T element = this.buffer[this.buffer.length];
+        this.buffer[this.buffer.length] = null;
+        this.size--;
+        return element;
+    }
+
 }
