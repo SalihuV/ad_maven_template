@@ -109,4 +109,18 @@ public final class BoundedBuffer<T> {
         return element;
     }
 
+    private synchronized void push(T element) {
+        if (!(this.buffer.length == this.size)) {
+            this.buffer[size] = element;
+            this.size++;
+        }
+    }
+
+    private synchronized T pop() {
+        T element = this.buffer[this.size];
+        this.buffer[this.size] = null;
+        this.size--;
+        return element;
+    }
+
 }
