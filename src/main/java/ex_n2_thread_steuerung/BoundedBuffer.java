@@ -36,7 +36,7 @@ public final class BoundedBuffer<T> {
     }
 
     public boolean full() {
-        return this.size == 0;
+        return this.size == this.buffer.length;
     }
 
     public int size() {
