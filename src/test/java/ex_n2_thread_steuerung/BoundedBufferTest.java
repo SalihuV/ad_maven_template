@@ -191,7 +191,7 @@ public class BoundedBufferTest {
     }
 
     @Test
-    public void testAsyncWaitGet_elements() throws InterruptedException {
+    public void testAsyncWaitGetBothElements() throws InterruptedException {
         BoundedBuffer<Integer> buffer = new BoundedBuffer<>(5);
 
         ConsumerElement<Integer> c1Element = new ConsumerElement<>();
@@ -230,4 +230,54 @@ public class BoundedBufferTest {
         assertTrue(new Integer(21).equals(c1Element.element) ^ (new Integer(21).equals(c2Element.element)));
     }
 
+    @Test
+    public void testAsyncWaitGet3Elements() throws InterruptedException {
+        BoundedBuffer<Integer> buffer = new BoundedBuffer<>(5);
+
+        ConsumerElement<Integer> c1Element = new ConsumerElement<>();
+        ConsumerElement<Integer> c2Element = new ConsumerElement<>();
+        ConsumerElement<Integer> c3Element = new ConsumerElement<>();
+
+        // set up two consumers to read from buffer
+        Thread c1 = new Thread(() -> {
+            try {
+                c1Element.element = buffer.get();
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        });
+
+        Thread c2 = new Thread(() -> {
+            try {
+                c2Element.element = buffer.get();
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        });
+
+        Thread c3 = new Thread(() -> {
+            try {
+                c3Element.element = buffer.get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+
+        // start consumers
+        c1.start();
+        c2.start();
+        c3.start();
+
+        // give the threads a chance to get elements (case of wrong implementation)
+        Thread.sleep(250);
+
+        // produce a value and expect that it was consumed
+        buffer.put(21);
+        Thread.sleep(250);
+        
+
+        assertTrue(new Integer(21).equals(c1Element.element) ^ (new Integer(21).equals(c2Element.element)) ^ (new Integer(21).equals(c3Element.element)));
+    }
 }
