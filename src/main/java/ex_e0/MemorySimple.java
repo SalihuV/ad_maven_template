@@ -11,7 +11,7 @@ import java.util.*;
  *
  * @author Valon
  */
-public class MemorySimple implements Memory {
+public abstract class MemorySimple implements Memory {
 
     private LinkedHashMap table = new LinkedHashMap();
 

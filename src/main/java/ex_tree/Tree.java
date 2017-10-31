@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
  *
  * @author Valon
  */
-public class Tree<T extends Comparable<T>> implements TreeInterface<T> {
+public abstract class Tree<T extends Comparable<T>> implements TreeInterface<T> {
 
     static Logger LOG = LogManager.getLogger(Tree.class);
     
@@ -27,8 +27,8 @@ public class Tree<T extends Comparable<T>> implements TreeInterface<T> {
     @Override
     public void removeNode(final T value)
     {
-       TreeNode node = this.search(value);
+       /*TreeNode node = this.search(value);
        TreeNode leftNode = node.getParent(node, node);
-       TreeNode rightNode = node.getParent(node,node);
+       TreeNode rightNode = node.getParent(node,node);*/
     }
 }

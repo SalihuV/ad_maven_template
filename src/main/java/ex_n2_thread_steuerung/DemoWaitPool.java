@@ -16,9 +16,9 @@ public final class DemoWaitPool {
     public static void main(final String args[]) throws InterruptedException {
         MyTask waiter = new MyTask(lock);
         new Thread(waiter).start();
-        Thread.sleep(500);
-        synchronized (waiter) {
-            waiter.notify();
+        Thread.sleep(1000);
+        synchronized (lock) {
+            lock.notifyAll();
         }
 
     }

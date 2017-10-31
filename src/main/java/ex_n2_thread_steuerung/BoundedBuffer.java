@@ -40,7 +40,7 @@ public final class BoundedBuffer<T> {
     }
 
     public int size() {
-        return this.size;
+        return this.capacity;
     }
 
     public void put(final T element) throws InterruptedException {

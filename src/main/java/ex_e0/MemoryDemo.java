@@ -20,7 +20,7 @@ public class MemoryDemo {
      */
     public static void main(String[] args) {
 
-        final Memory memory = new MemorySimple(1024);
+        /*final Memory memory = new MemorySimple(1024);
         LOG.info(memory);
         final Allocation block1 = memory.malloc(16);
         LOG.info(block1);
@@ -29,7 +29,7 @@ public class MemoryDemo {
         LOG.info(block2);
         LOG.info(memory);
         memory.free(block1);
-
+*/
     }
 
 }
