@@ -28,7 +28,7 @@ public class RaceHorse implements Runnable {
     @Override
     public void run() {
         runThread = Thread.currentThread();
-        LOG.info("Rennpferd" + runThread.getName() + "geht in die Box");
+        //LOG.info("Rennpferd" + runThread.getName() + "geht in die Box");
         try {
             startSignal.acquire();
             LOG.info("Rennpferd " + runThread.getName() + " geht in die Box.");
