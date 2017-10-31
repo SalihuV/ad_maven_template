@@ -24,9 +24,9 @@ public final class BoundedBuffer<T> {
     public BoundedBuffer(final int capacity) {
         this.capacity = capacity;
 
-        this.buffer = (T[]) new Object[capacity];
+        this.buffer = (T[]) new Object[this.capacity];
 
-        this.putSemaphore = new Semaphore(capacity);
+        this.putSemaphore = new Semaphore(this.capacity);
 
         this.getSemaphore = new Semaphore(0);
     }
