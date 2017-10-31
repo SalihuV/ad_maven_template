@@ -20,7 +20,6 @@ public class Semaphore {
     public synchronized void acquire() throws InterruptedException {
         while (this.semaphores == 0) {
             this.wait();
-
         }
         this.semaphores--;
     }
