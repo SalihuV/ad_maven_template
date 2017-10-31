@@ -30,15 +30,15 @@ public final class BoundedBuffer<T> {
 
         this.getSemaphore = new Semaphore(0);
     }
-
+    //check if the buffer is empty
     public boolean empty() {
         return this.size == 0;
     }
-
+    //check if the buffer is full
     public boolean full() {
         return this.size == this.buffer.length;
     }
-
+    //return the size
     public int size() {
         return this.capacity;
     }
