@@ -36,5 +36,4 @@ public class Latch implements Synch {
         }
         this.notifyAll();
     }
-
 }
