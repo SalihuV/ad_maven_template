@@ -9,17 +9,17 @@ package ex_n3_threads_weiterfuehrendeKonzepte;
  *
  * @author Valon
  */
-public class Sempahore {
+public class Semaphore {
 
     private int semi;
 
-    public Sempahore(final int init) {
+    public Semaphore(final int init) {
         this.semi = init;
     }
 
-    public synchronized void acquire() throws InterruptedException {
+    public synchronized void acquire(final int timeOutMillis) throws InterruptedException {
         while (this.semi == 0) {
-            this.wait();
+            this.wait(timeOutMillis);
         }
         this.semi--;
     }
