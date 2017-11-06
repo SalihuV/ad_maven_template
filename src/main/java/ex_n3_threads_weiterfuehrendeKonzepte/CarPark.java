@@ -5,66 +5,58 @@
  */
 package ex_n3_threads_weiterfuehrendeKonzepte;
 
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+
 /**
  *
  * @author Valon
  */
-public class CarPark<T> {
-
-    private final int CAPACITY = 200;
-    private int reservedPlaces = 0;
-    private final Semaphore getInSemi;
-    private final Semaphore getOutSemi;
-    private final T[] cars;
-
-    public CarPark() {
-        this.cars = (T[]) new Object[this.CAPACITY];
-
-        this.getInSemi = new Semaphore(this.CAPACITY);
-
-        this.getOutSemi = new Semaphore(0);
+public class CarPark {
+    
+    private static final Logger LOG = LogManager.getLogger(CarPark.class);
+    private final int capacity;
+    private final int number;
+    private int occupied = 0;
+    
+    public CarPark(final int capacity, final int number) {
+        this.capacity = capacity;
+        this.number = number;
     }
-
+    
     public boolean empty() {
-        return this.reservedPlaces == 0;
+        return this.occupied == 0;
     }
-
+    
     public boolean full() {
-        return this.reservedPlaces == this.CAPACITY;
+        return this.occupied == this.capacity;
     }
-
-    public int getSize() {
-        return this.reservedPlaces;
+    
+    public int getFreeParkingFields() {
+        return this.capacity - this.occupied;
     }
-
-    public void put(final T element, final int timeOutMillis) throws InterruptedException {
-        this.getInSemi.acquire(timeOutMillis);
-        putElement(element);
-        this.getOutSemi.release();
+    
+    public synchronized void enter(Car car) throws InterruptedException {
+        if (this.getFreeParkingFields() <= 0) {
+            this.wait();
+        }
+        if (this.occupied < this.capacity) {
+            this.occupied++;
+            LOG.info(car + " entered " + this);
+        } else {
+            throw new IllegalStateException("It's full, sorry mate");
+        }
     }
-
-    public void put(final T element) throws InterruptedException {
-        this.getInSemi.acquire(0);
-        putElement(element);
-        this.getOutSemi.release();
+    
+    public synchronized void leave(Car car) {
+        this.occupied--;
+        this.notifyAll();
+        LOG.info(car + " left " + this);
     }
-
-    public T get() throws InterruptedException {
-        this.getOutSemi.acquire(0);
-        T element = getElement();
-        this.getOutSemi.release();
-        return element;
+    
+    @Override
+    public String toString()
+    {
+        return String.format("CAR PARK #%d, %d/%d occupied",this.number,this.occupied,this.capacity);
     }
-
-    private synchronized void putElement(final T element) {
-        this.cars[this.CAPACITY - this.reservedPlaces] = element;
-        this.reservedPlaces++;
-    }
-
-    private synchronized T getElement() {
-        T element = this.cars[this.CAPACITY - this.reservedPlaces];
-        this.reservedPlaces--;
-        return element;
-    }
-
 }
