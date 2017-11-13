@@ -22,7 +22,7 @@ public class SortTypes {
         for (int i = 0; i < a.length; i++) {
             elt = a[i];
             j = i;
-            while (a[j - 1] > elt) {
+            while (j > 0 && a[j - 1] > elt) {
                 a[j] = a[j - 1];
                 j--;
             }
@@ -42,7 +42,6 @@ public class SortTypes {
 
         }
     }
-    
 
     public static void bubblesort(final int[] a) {
         int temp;
@@ -56,29 +55,41 @@ public class SortTypes {
             }
         }
     }
-    
-    public static void bubblesort2(final int[]a)
-    {
-        for(int i= 1; i < a.length; i++)
-        {
+
+    public static void bubblesort2(final int[] a) {
+        for (int i = 1; i < a.length; i++) {
             boolean nothingToBubble = true;
-            for (int j = 0; j < a.length -1 -i; j++)
-            {
-                //LOG.debug("j = " + j);
-                if (a[j] == a[j+1])
-                {
+            for (int j = 0; j < a.length - 1 - i; j++) {
+                if (a[j] == a[j + 1]) {
                     int temp = a[j];
-                    a[j] = a[j+1];
-                    a[j+1] = temp;
+                    a[j] = a[j + 1];
+                    a[j + 1] = temp;
                     nothingToBubble = false;
                 }
             }
-            if(nothingToBubble)
-            {
+            if (nothingToBubble) {
                 break;
             }
         }
-        
+
+    }
+    
+    public static void shellSort(int a[])
+    {
+        int n = a.length;
+        for(int gap = n/2; gap > 0; gap /= 2)
+        {
+            for(int i= gap; i < n; i += 1)
+            {
+                int temp = a[i];
+                int j;
+                for(j= i; j >= gap && a[j-gap] >temp;j-=gap)
+                {
+                    a[j] = a[j-gap];
+                }
+                a[j] = temp;
+            }
+        }
     }
 
 }

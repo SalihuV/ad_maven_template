@@ -28,39 +28,46 @@ public class Sort {
 
         // TODO code application logic here
         long start;
-        int[] data = new int[40000];
+        int[] selectionSortdata = new int[40000];
 
-        for (int i = 0; i < data.length; i++) {
-            data[i] = ThreadLocalRandom.current().nextInt(0, 400000);
+        for (int i = 0; i < selectionSortdata.length; i++) {
+            selectionSortdata[i] = ThreadLocalRandom.current().nextInt(0, 400000);
         }
 
         start = System.currentTimeMillis();
-        SortTypes.selectionSort(data);
-        logTime("Random insertion sort", start);
-
-        int[] data2 = new int[40000];
-        for (int i = 0; i < data2.length; i++) {
-            data2[i] = ThreadLocalRandom.current().nextInt(0, 40000);
-        }
-        start = System.currentTimeMillis();
-        SortTypes.selectionSort(data2);
+        SortTypes.selectionSort(selectionSortdata);
         logTime("Random selection sort", start);
 
-        int[] data3 = new int[40000];
-        for (int i = 0; i < data3.length; i++) {
-            data3[i] = ThreadLocalRandom.current().nextInt(0, 40000);
+        int[] insertionSortData = new int[40000];
+        for (int i = 0; i < insertionSortData.length; i++) {
+            insertionSortData[i] = ThreadLocalRandom.current().nextInt(0, 40000);
         }
         start = System.currentTimeMillis();
-        SortTypes.bubblesort(data3);
+        SortTypes.insertionSort2(insertionSortData);
+        logTime("Random insertion sort", start);
+
+        int[] bubbleSortData = new int[40000];
+        for (int i = 0; i < bubbleSortData.length; i++) {
+            bubbleSortData[i] = ThreadLocalRandom.current().nextInt(0, 40000);
+        }
+        start = System.currentTimeMillis();
+        SortTypes.bubblesort(bubbleSortData);
         logTime("Random bubble sort", start);
 
-        int[] data4 = new int[40000];
-        for (int i = 0; i < data4.length; i++) {
-            data4[i] = ThreadLocalRandom.current().nextInt(0, 40000);
+        int[] bubbleSortData2 = new int[40000];
+        for (int i = 0; i < bubbleSortData2.length; i++) {
+            bubbleSortData2[i] = ThreadLocalRandom.current().nextInt(0, 40000);
         }
         start = System.currentTimeMillis();
-        SortTypes.bubblesort2(data4);
+        SortTypes.bubblesort2(bubbleSortData2);
         logTime("Random bubble sort2", start);
 
+        int[] datashellsort = new int[40000];
+        for (int i = 0; i < datashellsort.length; i++) {
+            datashellsort[i] = ThreadLocalRandom.current().nextInt(0, 40000);
+        }
+        start = System.currentTimeMillis();
+        SortTypes.shellSort(datashellsort);
+        logTime("Random shell sort", start);
     }
 }
