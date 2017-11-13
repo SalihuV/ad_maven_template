@@ -62,9 +62,9 @@ public class Sort {
         SortTypes.bubblesort2(bubbleSortData2);
         logTime("Random bubble sort2", start);
 
-        int[] datashellsort = new int[40000];
+        int[] datashellsort = new int[400000];
         for (int i = 0; i < datashellsort.length; i++) {
-            datashellsort[i] = ThreadLocalRandom.current().nextInt(0, 40000);
+            datashellsort[i] = ThreadLocalRandom.current().nextInt(0, 400000);
         }
         start = System.currentTimeMillis();
         SortTypes.shellSort(datashellsort);
